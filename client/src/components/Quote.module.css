@@ -1,0 +1,14 @@
+.quote {
+  color: var(--color-text);
+  font-size: clamp(1.1rem, 2vw, 2rem);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 40rem;
+}
+
+.author {
+  display: block;
+  font-size: 0.7em;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
