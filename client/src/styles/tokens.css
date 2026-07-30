@@ -1,0 +1,22 @@
+:root {
+  /* Colors */
+  --color-text: #e4eaee;
+  --color-date: #e4e4e4;
+  --color-navy: #14384e;
+  --color-cyan: #35e3e9;
+  --color-cell-border: #e4eaee;
+  --color-cell-fill-a: rgba(228, 234, 238, 0.5);
+  --color-cell-fill-b: rgba(53, 227, 233, 0.5);
+
+  /* Font */
+  --font-family: 'Abhaya Libre', serif;
+
+  /* Reference sizes at 1440px, converted to clamp() for scaling */
+  --font-size-month-title: clamp(2.5rem, 6vw, 6rem);   /* 96px */
+  --font-size-date-number: clamp(2rem, 4.5vw, 4rem);   /* 64px */
+  --font-size-weekday: clamp(1.25rem, 2.5vw, 2.25rem); /* 36px */
+  --font-size-greeting: clamp(1.25rem, 2vw, 2rem);     /* 32px */
+  --font-size-clock: clamp(2rem, 4.5vw, 4rem);         /* 64px */
+
+  --cell-border-width: 3px;
+}
