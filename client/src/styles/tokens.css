@@ -7,6 +7,8 @@
   --color-cell-border: #e4eaee;
   --color-cell-fill-a: rgba(228, 234, 238, 0.5);
   --color-cell-fill-b: rgba(53, 227, 233, 0.5);
+  --color-field-fill: #d9d9d9;
+  --color-button-accent: #e91cfb;
 
   /* Font */
   --font-family: 'Abhaya Libre', serif;
