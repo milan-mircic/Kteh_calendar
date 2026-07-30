@@ -1,0 +1,126 @@
+.calendar {
+  width: 100%;
+  max-width: 65rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25em 0.5em;
+}
+
+.navButton:focus-visible {
+  outline: 3px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+.title {
+  font-size: var(--font-size-month-title);
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.5rem;
+}
+
+.weekday {
+  font-size: var(--font-size-weekday);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.cell {
+  position: relative;
+  min-height: 6rem;
+  border: var(--cell-border-width) solid var(--color-cell-border);
+  padding: 0.4rem;
+  background: var(--color-cell-fill-a);
+}
+
+.cellAlt {
+  background: var(--color-cell-fill-b);
+}
+
+.cellDimmed {
+  opacity: 0.45;
+}
+
+.dateNumber {
+  font-size: var(--font-size-date-number);
+  color: var(--color-date);
+  line-height: 1;
+}
+
+.today .dateNumber {
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+.addButton {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-cyan);
+  border-radius: 3px;
+  background: none;
+  color: var(--color-cyan);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.activities {
+  list-style: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.activity {
+  font-size: 0.75rem;
+  color: var(--color-navy);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  display: block;
+}
+
+.more {
+  font-size: 0.7rem;
+  color: var(--color-navy);
+}
