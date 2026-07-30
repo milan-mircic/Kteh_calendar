@@ -1,0 +1,85 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+  gap: 2rem;
+}
+
+.heading {
+  font-size: var(--font-size-month-title);
+  font-weight: 400;
+  text-align: center;
+  margin: 3rem 0 0;
+}
+
+.card {
+  width: min(90vw, 57rem);
+  background: rgba(53, 227, 233, 0.5);
+  border: 1px solid var(--color-cyan);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+}
+
+.description {
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.deleteButton {
+  color: #ff6b6b;
+}
+
+.error {
+  color: #ff6b6b;
+  text-align: center;
+}
+
+.back {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: var(--color-text);
+  border: none;
+  color: var(--color-cyan);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
