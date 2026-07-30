@@ -1,0 +1,57 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  gap: 2rem;
+}
+
+.back {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: var(--color-field-fill);
+  border: none;
+  color: var(--color-cyan);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.heading {
+  font-size: var(--font-size-month-title);
+  font-weight: 400;
+  text-align: center;
+  margin: 3rem 0 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: min(90vw, 40rem);
+}
+
+.error {
+  color: #ff6b6b;
+  text-align: center;
+}
+
+.submit {
+  align-self: center;
+  min-width: 12rem;
+}
+
+.forgot {
+  align-self: center;
+  color: var(--color-cyan);
+  text-decoration: underline;
+}
