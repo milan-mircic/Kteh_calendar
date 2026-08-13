@@ -2,6 +2,7 @@ import PageBackground from '../components/PageBackground';
 import Calendar from '../components/Calendar';
 import Quote from '../components/Quote';
 import TopBar from '../components/TopBar';
+import ActivitiesList from '../components/ActivitiesList';
 import styles from './HomePage.module.css';
 
 // Figma: 7:171 (list), 34:1232 (empty state), 30:1239 (calendar), 44:2589 (dropdown open)
@@ -16,7 +17,10 @@ export default function HomePage() {
       <section className={styles.section}>
         <Quote />
       </section>
-      {/* Activities list + empty state: Person 2, Phase 3 */}
+
+      <section className={styles.section}>
+        <ActivitiesList />
+      </section>
 
       <section className={styles.section}>
         <Calendar />
