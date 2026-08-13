@@ -27,3 +27,8 @@ const TIME_FORMATTER = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minut
 export function formatTimeRange(startIso: string, endIso: string): string {
   return `${TIME_FORMATTER.format(new Date(startIso))} - ${TIME_FORMATTER.format(new Date(endIso))}`;
 }
+
+// e.g. "21:51" — used by the top bar's live clock (Figma: Time_stamp, 44:2596)
+export function formatClock(date: Date): string {
+  return TIME_FORMATTER.format(date);
+}

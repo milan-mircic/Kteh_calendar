@@ -1,0 +1,16 @@
+.topBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.clock {
+  font-family: var(--font-family);
+  font-size: var(--font-size-clock);
+  color: var(--color-text);
+  line-height: 1.5;
+}
