@@ -3,10 +3,14 @@ import { COOKIE_NAME, verifyToken } from '../lib/auth';
 
 // Attaches `req.user = { id }` when the auth cookie is present and valid,
 // otherwise responds 401. Every protected route uses this.
+//
+// Augments `Express.User` (not `Request.user` directly) so this merges
+// cleanly with @types/passport's own `Request.user?: Express.User` — the
+// Google OAuth strategy's verify callback returns the same `{ id }` shape.
 declare global {
   namespace Express {
-    interface Request {
-      user?: { id: string };
+    interface User {
+      id: string;
     }
   }
 }
