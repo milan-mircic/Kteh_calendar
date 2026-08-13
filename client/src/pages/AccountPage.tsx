@@ -1,4 +1,46 @@
+import { Link } from 'react-router-dom';
+import PageBackground from '../components/PageBackground';
+import BackButton from '../components/BackButton';
+import Button from '../components/Button';
+import { useAuth } from '../context/AuthContext';
+import styles from './AccountPage.module.css';
+
+const PURPOSE_LABELS: Record<string, string> = {
+  personal: 'Personal',
+  work: 'Work',
+  study: 'Study',
+  other: 'Other',
+};
+
 // Figma: 22:29 — route "/account"
 export default function AccountPage() {
-  return <h1>My account</h1>;
+  const { user } = useAuth();
+  if (!user) return null;
+
+  return (
+    <div className={styles.page}>
+      <PageBackground src="/backgrounds/home.png" />
+      <BackButton to="/home" className={styles.back} />
+      <h1 className={styles.heading}>About me</h1>
+
+      <div className={styles.card}>
+        <dl className={styles.fields}>
+          <dt>First name:</dt>
+          <dd>{user.firstName}</dd>
+          <dt>Last name:</dt>
+          <dd>{user.lastName}</dd>
+          <dt>Purpose of the use:</dt>
+          <dd>{user.purpose ? (PURPOSE_LABELS[user.purpose] ?? user.purpose) : '—'}</dd>
+          <dt>Email:</dt>
+          <dd>{user.email}</dd>
+          <dt>Password:</dt>
+          <dd aria-hidden>••••••••</dd>
+        </dl>
+      </div>
+
+      <Link to="/account/edit" className={styles.editLink}>
+        <Button type="button">Edit the information</Button>
+      </Link>
+    </div>
+  );
 }

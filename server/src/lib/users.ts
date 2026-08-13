@@ -75,6 +75,36 @@ export function linkGoogleAccount(userId: string, googleId: string): void {
   db.prepare('UPDATE users SET google_id = ? WHERE id = ?').run(googleId, userId);
 }
 
+export interface UserPatch {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  purpose?: string;
+  dateOfBirth?: string;
+  passwordHash?: string;
+  avatarUrl?: string;
+}
+
+export function updateUser(id: string, patch: UserPatch): UserRow | undefined {
+  const existing = getUserById(id);
+  if (!existing) return undefined;
+
+  db.prepare(
+    `UPDATE users SET first_name = ?, last_name = ?, email = ?, purpose = ?, date_of_birth = ?, password_hash = ?, avatar_url = ?
+     WHERE id = ?`,
+  ).run(
+    patch.firstName ?? existing.first_name,
+    patch.lastName ?? existing.last_name,
+    patch.email ?? existing.email,
+    patch.purpose ?? existing.purpose,
+    patch.dateOfBirth ?? existing.date_of_birth,
+    patch.passwordHash ?? existing.password_hash,
+    patch.avatarUrl ?? existing.avatar_url,
+    id,
+  );
+  return getUserById(id);
+}
+
 // Never send password_hash to the client.
 export function toPublicUser(row: UserRow): User {
   return {

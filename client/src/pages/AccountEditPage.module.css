@@ -1,0 +1,62 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem 4rem;
+}
+
+.back {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: min(90vw, 32rem);
+  margin: 2rem auto 0;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  margin: 0;
+}
+
+.error {
+  color: #ff6b6b;
+  text-align: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+
+.label {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+}
+
+.select {
+  font-family: var(--font-family);
+  color: var(--color-navy);
+  border: 1px solid var(--color-cyan);
+  background: var(--color-text);
+  padding: 0.5em 0.75em;
+  border-radius: 8px;
+}
