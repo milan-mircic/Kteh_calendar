@@ -1,7 +1,15 @@
+import { randomUUID } from 'crypto';
 import { Router } from 'express';
 import { z } from 'zod';
 import { authMiddleware } from '../middleware/auth';
-import { getActivityById, listActivitiesForMonth, toPublicActivity } from '../lib/activities';
+import {
+  createActivity,
+  deleteActivity,
+  getActivityById,
+  listActivitiesForMonth,
+  toPublicActivity,
+  updateActivity,
+} from '../lib/activities';
 
 export const activitiesRouter = Router();
 
@@ -31,15 +39,55 @@ activitiesRouter.get('/:id', (req, res) => {
   res.json(toPublicActivity(row));
 });
 
-// Person 2 (Phase 3)
-activitiesRouter.post('/', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+const activityFieldsSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().optional(),
+  location: z.string().optional(),
+  startAt: z.string().datetime(),
+  endAt: z.string().datetime(),
 });
 
-activitiesRouter.patch('/:id', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+const createActivitySchema = activityFieldsSchema.refine((data) => data.endAt > data.startAt, {
+  message: 'endAt must be after startAt',
+  path: ['endAt'],
 });
 
-activitiesRouter.delete('/:id', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+const updateActivitySchema = activityFieldsSchema.partial().refine(
+  (data) => !data.startAt || !data.endAt || data.endAt > data.startAt,
+  { message: 'endAt must be after startAt', path: ['endAt'] },
+);
+
+activitiesRouter.post('/', (req, res) => {
+  const parsed = createActivitySchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
+    return;
+  }
+
+  const row = createActivity({ id: randomUUID(), userId: req.user!.id, ...parsed.data });
+  res.status(201).json(toPublicActivity(row));
+});
+
+activitiesRouter.patch('/:id', (req, res) => {
+  const parsed = updateActivitySchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
+    return;
+  }
+
+  const row = updateActivity(req.user!.id, req.params.id, parsed.data);
+  if (!row) {
+    res.status(404).json({ error: 'Activity not found' });
+    return;
+  }
+  res.json(toPublicActivity(row));
+});
+
+activitiesRouter.delete('/:id', (req, res) => {
+  const deleted = deleteActivity(req.user!.id, req.params.id);
+  if (!deleted) {
+    res.status(404).json({ error: 'Activity not found' });
+    return;
+  }
+  res.status(204).end();
 });

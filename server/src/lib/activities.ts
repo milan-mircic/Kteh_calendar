@@ -51,3 +51,63 @@ export function getActivityById(userId: string, id: string): ActivityRow | undef
     .prepare('SELECT * FROM activities WHERE id = ? AND user_id = ?')
     .get(id, userId) as ActivityRow | undefined;
 }
+
+export interface NewActivity {
+  id: string;
+  userId: string;
+  title: string;
+  description?: string;
+  location?: string;
+  startAt: string;
+  endAt: string;
+}
+
+export function createActivity(input: NewActivity): ActivityRow {
+  db.prepare(
+    `INSERT INTO activities (id, title, description, location, start_at, end_at, user_id)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+  ).run(
+    input.id,
+    input.title,
+    input.description ?? null,
+    input.location ?? null,
+    input.startAt,
+    input.endAt,
+    input.userId,
+  );
+  return getActivityById(input.userId, input.id)!;
+}
+
+export interface ActivityPatch {
+  title?: string;
+  description?: string;
+  location?: string;
+  startAt?: string;
+  endAt?: string;
+}
+
+// Returns undefined when the activity doesn't exist (or belongs to another
+// user) so the route can respond 404 without a separate existence check.
+export function updateActivity(userId: string, id: string, patch: ActivityPatch): ActivityRow | undefined {
+  const existing = getActivityById(userId, id);
+  if (!existing) return undefined;
+
+  db.prepare(
+    `UPDATE activities SET title = ?, description = ?, location = ?, start_at = ?, end_at = ?
+     WHERE id = ? AND user_id = ?`,
+  ).run(
+    patch.title ?? existing.title,
+    patch.description ?? existing.description,
+    patch.location ?? existing.location,
+    patch.startAt ?? existing.start_at,
+    patch.endAt ?? existing.end_at,
+    id,
+    userId,
+  );
+  return getActivityById(userId, id);
+}
+
+export function deleteActivity(userId: string, id: string): boolean {
+  const result = db.prepare('DELETE FROM activities WHERE id = ? AND user_id = ?').run(id, userId);
+  return result.changes > 0;
+}
