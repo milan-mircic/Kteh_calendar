@@ -1,0 +1,22 @@
+// Figma: "google" (25:1223) on the Opening screen (1:1054) — Google's
+// official 4-color "G" mark, inlined so it doesn't depend on Figma's
+// short-lived asset URLs.
+export default function GoogleIcon({ size = 28 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden focusable="false">
+      <path
+        fill="#4285F4"
+        d="M46.5 24.5c0-1.6-.15-3.15-.42-4.64H24v9.02h12.65c-.55 2.9-2.2 5.36-4.68 7.02v5.84h7.58C43.86 37.6 46.5 31.6 46.5 24.5z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 47c6.3 0 11.6-2.08 15.45-5.66l-7.58-5.84c-2.1 1.4-4.78 2.24-7.87 2.24-6.05 0-11.18-4.08-13.02-9.56H3.14v6.02C6.96 41.98 14.84 47 24 47z"
+      />
+      <path fill="#FBBC05" d="M10.98 28.18A13.9 13.9 0 0 1 10.24 24c0-1.45.25-2.86.74-4.18v-6.02H3.14A22.94 22.94 0 0 0 .98 24c0 3.7.88 7.2 2.16 10.2z" />
+      <path
+        fill="#EA4335"
+        d="M24 10.26c3.43 0 6.5 1.18 8.92 3.5l6.7-6.7C35.6 3.36 30.3 1 24 1 14.84 1 6.96 6.02 3.14 13.8l7.84 6.02c1.84-5.48 6.97-9.56 13.02-9.56z"
+      />
+    </svg>
+  );
+}

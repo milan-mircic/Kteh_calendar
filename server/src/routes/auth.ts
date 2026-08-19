@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { authMiddleware } from '../middleware/auth';
 import { setAuthCookie, clearAuthCookie } from '../lib/auth';
 import { createUser, getUserByEmail, getUserById, toPublicUser } from '../lib/users';
+import { googleAuthEnabled, passport } from '../lib/googleAuth';
 
 export const authRouter = Router();
 
@@ -88,16 +89,45 @@ authRouter.get('/me', authMiddleware, (req, res) => {
   res.json(toPublicUser(user));
 });
 
-// Person 2: Google OAuth (Phase 2)
-authRouter.get('/google', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+authRouter.get('/google', (req, res, next) => {
+  if (!googleAuthEnabled) {
+    res.status(501).json({ error: 'Google sign-in is not configured' });
+    return;
+  }
+  passport.authenticate('google', { scope: ['profile', 'email'], session: false })(req, res, next);
 });
 
-authRouter.get('/google/callback', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+authRouter.get('/google/callback', (req, res, next) => {
+  if (!googleAuthEnabled) {
+    res.status(501).json({ error: 'Google sign-in is not configured' });
+    return;
+  }
+  passport.authenticate(
+    'google',
+    { session: false },
+    (err: Error | null, user?: Express.User) => {
+      if (err || !user) {
+        res.redirect(`${process.env.CLIENT_URL}/login`);
+        return;
+      }
+      setAuthCookie(res, { userId: user.id });
+      res.redirect(`${process.env.CLIENT_URL}/home`);
+    },
+  )(req, res, next);
 });
 
-// Person 2: stub — log a reset link, no real email (out of scope)
-authRouter.post('/forgot-password', (_req, res) => {
-  res.status(501).json({ error: 'Not implemented' });
+// Stub — log a reset link, no real email (out of scope). TODO: send a real
+// password-reset email once the app has an email provider.
+const forgotPasswordSchema = z.object({ email: z.string().email() });
+
+authRouter.post('/forgot-password', (req, res) => {
+  const parsed = forgotPasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
+    return;
+  }
+
+  const resetToken = randomUUID();
+  console.log(`[forgot-password] reset link for ${parsed.data.email}: /reset-password?token=${resetToken}`);
+  res.status(204).end();
 });

@@ -32,6 +32,10 @@ export function getUserById(id: string): UserRow | undefined {
   return db.prepare('SELECT * FROM users WHERE id = ?').get(id) as UserRow | undefined;
 }
 
+export function getUserByGoogleId(googleId: string): UserRow | undefined {
+  return db.prepare('SELECT * FROM users WHERE google_id = ?').get(googleId) as UserRow | undefined;
+}
+
 export function createUser(input: NewUser): UserRow {
   db.prepare(
     `INSERT INTO users (id, email, password_hash, first_name, last_name, date_of_birth, purpose)
@@ -46,6 +50,29 @@ export function createUser(input: NewUser): UserRow {
     input.purpose ?? null,
   );
   return getUserById(input.id)!;
+}
+
+export interface NewGoogleUser {
+  id: string;
+  email: string;
+  googleId: string;
+  firstName: string;
+  lastName: string;
+}
+
+// password_hash stays NULL — this account can only sign in via Google.
+export function createGoogleUser(input: NewGoogleUser): UserRow {
+  db.prepare(
+    `INSERT INTO users (id, email, google_id, first_name, last_name)
+     VALUES (?, ?, ?, ?, ?)`,
+  ).run(input.id, input.email, input.googleId, input.firstName, input.lastName);
+  return getUserById(input.id)!;
+}
+
+// A Google sign-in whose email matches an existing password account links
+// to it (§7 gotcha) rather than creating a duplicate user.
+export function linkGoogleAccount(userId: string, googleId: string): void {
+  db.prepare('UPDATE users SET google_id = ? WHERE id = ?').run(googleId, userId);
 }
 
 // Never send password_hash to the client.

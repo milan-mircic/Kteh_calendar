@@ -4,12 +4,14 @@ import PageBackground from '../components/PageBackground';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { api, ApiError } from '../api';
+import { useAuth } from '../context/AuthContext';
 import type { User } from '../types';
 import styles from './RegisterPage.module.css';
 
 // Figma: 7:174 — route "/register"
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,7 +38,7 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      await api.post<User>('/api/auth/register', {
+      const user = await api.post<User>('/api/auth/register', {
         email,
         password,
         firstName,
@@ -44,6 +46,7 @@ export default function RegisterPage() {
         dateOfBirth: dateOfBirth || undefined,
         purpose: purpose || undefined,
       });
+      login(user);
       navigate('/home');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Something went wrong');

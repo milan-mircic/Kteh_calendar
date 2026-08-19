@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppShell from './components/AppShell';
+import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import OpeningPage from './pages/OpeningPage';
 import LoginPage from './pages/LoginPage';
@@ -22,13 +23,15 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/activity/new" element={<ActivityFormPage />} />
-            <Route path="/activity/:id" element={<ActivityDetailPage />} />
-            <Route path="/activity/:id/edit" element={<ActivityFormPage />} />
-            <Route path="/account" element={<AccountPage />} />
-            <Route path="/account/edit" element={<AccountEditPage />} />
-            <Route path="/account/avatar" element={<AccountAvatarPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/activity/new" element={<ActivityFormPage />} />
+              <Route path="/activity/:id" element={<ActivityDetailPage />} />
+              <Route path="/activity/:id/edit" element={<ActivityFormPage />} />
+              <Route path="/account" element={<AccountPage />} />
+              <Route path="/account/edit" element={<AccountEditPage />} />
+              <Route path="/account/avatar" element={<AccountAvatarPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

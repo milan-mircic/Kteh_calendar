@@ -9,6 +9,7 @@
   cursor: pointer;
   line-height: 1.5;
   text-align: center;
+  text-decoration: none;
 }
 
 .button:hover {
@@ -23,4 +24,18 @@
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+/* Figma: "Main button" (node 7:87) on the Opening screen (1:1054) */
+.large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 45rem; /* ~722px at 1440px */
+  font-size: clamp(1.75rem, 4.5vw, 4rem); /* 64px at 1440px */
+  color: var(--color-navy);
+  border-radius: 25px;
+  padding: 0.5em 1em;
 }

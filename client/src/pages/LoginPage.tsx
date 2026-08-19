@@ -4,12 +4,14 @@ import PageBackground from '../components/PageBackground';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { api, ApiError } from '../api';
+import { useAuth } from '../context/AuthContext';
 import type { User } from '../types';
 import styles from './LoginPage.module.css';
 
 // Figma: 2:4 — route "/login"
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +22,8 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
     try {
-      await api.post<User>('/api/auth/login', { email, password });
+      const user = await api.post<User>('/api/auth/login', { email, password });
+      login(user);
       navigate('/home');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Something went wrong');

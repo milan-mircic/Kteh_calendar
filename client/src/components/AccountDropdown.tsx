@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { api } from '../api';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './AccountDropdown.module.css';
 
@@ -23,7 +22,7 @@ function PersonIcon() {
 }
 
 export default function AccountDropdown() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,11 +54,8 @@ export default function AccountDropdown() {
 
   async function handleLogout() {
     close();
-    try {
-      await api.post('/api/auth/logout');
-    } finally {
-      navigate('/');
-    }
+    await logout();
+    navigate('/');
   }
 
   return (
