@@ -1,0 +1,91 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem 6rem;
+  gap: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: min(90vw, 60rem);
+  margin: 2rem auto 0;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.heading {
+  font-size: var(--font-size-month-title);
+  font-weight: 400;
+  margin: 0;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.row > * {
+  flex: 1;
+  min-width: 14rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+
+.label {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-family);
+}
+
+.textarea {
+  font-family: var(--font-family);
+  color: var(--color-navy);
+  background: var(--color-text);
+  border: 1px solid var(--color-cyan);
+  border-radius: 8px;
+  padding: 0.75em 1em;
+  min-height: 8rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.textarea:focus-visible {
+  outline: 3px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+.times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.times > * {
+  flex: 1;
+  min-width: 10rem;
+}
+
+.back {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
