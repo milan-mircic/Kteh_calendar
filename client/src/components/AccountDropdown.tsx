@@ -1,25 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PersonIcon from './PersonIcon';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './AccountDropdown.module.css';
 
 // Figma: Profil_Main (44:2595) trigger + "Main screen - account dropdown" open
 // state (44:2589) — "My account" / "Log out" / "Profile picture" menu.
-function PersonIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden focusable="false">
-      <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
-      <path
-        d="M4.5 19c1.4-3.2 4.2-5 7.5-5s6.1 1.8 7.5 5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export default function AccountDropdown() {
   const { user, logout } = useAuth();

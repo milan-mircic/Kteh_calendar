@@ -5,27 +5,12 @@ import TopBar from '../components/TopBar';
 import BackButton from '../components/BackButton';
 import IconButton from '../components/IconButton';
 import Input from '../components/Input';
+import SaveIcon from '../components/SaveIcon';
 import { api, ApiError } from '../api';
 import type { Activity } from '../types';
 import { toDateKey } from '../lib/calendar';
 import { formatOrdinalDate } from '../lib/date';
 import styles from './ActivityFormPage.module.css';
-
-function SaveIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden focusable="false">
-      <path
-        d="M5 4h11l3 3v13H5z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <path d="M8 4v5h7V4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-      <path d="M8 20v-6h8v6" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function combineDateTime(dateKey: string, time: string): string {
   return new Date(`${dateKey}T${time}`).toISOString();

@@ -1,0 +1,74 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+  gap: 2rem;
+}
+
+.back {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  text-align: center;
+  margin: 3rem 0 0;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.currentLabel {
+  color: var(--color-text);
+  font-size: var(--font-size-greeting);
+}
+
+.avatarPreview {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 1.5rem;
+  background: var(--color-field-fill);
+  color: var(--color-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatarPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPreview svg {
+  width: 60%;
+  height: 60%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: min(90vw, 30rem);
+}
+
+.error {
+  color: #ff6b6b;
+  text-align: center;
+}
+
+.submit {
+  align-self: center;
+  min-width: 12rem;
+}
