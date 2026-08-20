@@ -5,7 +5,9 @@
   border: none;
   border-radius: 999px;
   background: var(--color-field-fill);
-  color: var(--color-cyan);
+  /* --color-cyan is nearly invisible against --color-field-fill (1.1:1).
+     Navy holds ~8.7:1. */
+  color: var(--color-navy);
   display: flex;
   align-items: center;
   justify-content: center;

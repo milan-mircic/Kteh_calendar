@@ -11,3 +11,12 @@
   object-fit: cover;
   filter: blur(7.5px);
 }
+
+/* Guarantees light text stays legible regardless of the photo's own
+   brightness (see tokens.css --overlay-scrim). */
+.background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-scrim);
+}
