@@ -21,14 +21,6 @@ export function formatOrdinalDate(iso: string): string {
   return `${day}${ordinalSuffix(day)} of ${MONTH_FORMATTER.format(date)}`;
 }
 
-const WEEKDAY_FORMATTER = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
-
-// e.g. "Today, 20th August, Thursday" — used above the home quote.
-export function formatTodayHeading(date: Date): string {
-  const day = date.getDate();
-  return `Today, ${day}${ordinalSuffix(day)} ${MONTH_FORMATTER.format(date)}, ${WEEKDAY_FORMATTER.format(date)}`;
-}
-
 const TIME_FORMATTER = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' });
 
 // e.g. "20:00 - 21:45"

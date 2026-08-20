@@ -10,12 +10,9 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const isFormData = options?.body instanceof FormData;
   const res = await fetch(`${API_URL}${path}`, {
     credentials: 'include',
-    // Omit Content-Type for FormData so the browser sets the multipart
-    // boundary itself — a fixed "application/json" header would break it.
-    headers: isFormData ? undefined : { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     ...options,
   });
 
@@ -32,7 +29,6 @@ export const api = {
   get: <T>(path: string) => request<T>(path),
   post: <T>(path: string, data?: unknown) =>
     request<T>(path, { method: 'POST', body: data ? JSON.stringify(data) : undefined }),
-  postForm: <T>(path: string, data: FormData) => request<T>(path, { method: 'POST', body: data }),
   patch: <T>(path: string, data?: unknown) =>
     request<T>(path, { method: 'PATCH', body: data ? JSON.stringify(data) : undefined }),
   delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),

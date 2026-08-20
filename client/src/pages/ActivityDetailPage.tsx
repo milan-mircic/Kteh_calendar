@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
 import Button from '../components/Button';
-import HomeButton from '../components/HomeButton';
 import { api, ApiError } from '../api';
 import type { Activity } from '../types';
 import { formatOrdinalDate, formatTimeRange } from '../lib/date';
@@ -49,7 +48,6 @@ export default function ActivityDetailPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/home.png" />
-      <HomeButton className={styles.home} />
 
       {activity && <h1 className={styles.heading}>{formatOrdinalDate(activity.startAt)}</h1>}
 
@@ -81,6 +79,10 @@ export default function ActivityDetailPage() {
           </div>
         </div>
       )}
+
+      <Link to="/home" className={styles.back} aria-label="Back">
+        ‹
+      </Link>
     </div>
   );
 }

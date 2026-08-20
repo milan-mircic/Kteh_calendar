@@ -8,7 +8,7 @@
   gap: 2rem;
 }
 
-.home {
+.back {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
@@ -58,8 +58,11 @@
   height: 60%;
 }
 
-.hiddenInput {
-  display: none;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: min(90vw, 30rem);
 }
 
 .error {
