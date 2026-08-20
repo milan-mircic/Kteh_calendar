@@ -8,8 +8,10 @@
   --color-cell-fill-a: rgba(228, 234, 238, 0.5);
   --color-cell-fill-b: rgba(53, 227, 233, 0.5);
   --color-field-fill: #d9d9d9;
-  --color-button-accent: #e91cfb;
   --color-surface: #ffffff;
+  /* Scrim behind PageBackground photos so light text stays legible
+     regardless of what's in the photo. */
+  --overlay-scrim: rgba(10, 24, 32, 0.4);
 
   /* Font */
   --font-family: 'Abhaya Libre', serif;
