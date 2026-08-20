@@ -29,7 +29,9 @@
   padding: 1rem 1.5rem;
   min-height: 6.25rem;
   background: var(--color-cell-fill-a);
-  color: var(--color-cyan);
+  /* --color-cyan/--color-text are both light — nearly invisible against the
+     light --color-cell-fill-a/b backing. Navy holds ~8:1 contrast on both. */
+  color: var(--color-navy);
   text-decoration: none;
 }
 
@@ -39,7 +41,6 @@
 
 .rowAlt {
   background: var(--color-cell-fill-b);
-  color: var(--color-text);
 }
 
 .row:focus-visible {
@@ -94,8 +95,8 @@
   gap: 0.75rem;
   padding: 0.6em 1em;
   background: var(--color-cell-fill-b);
-  border: 1.5px solid var(--color-date);
-  color: var(--color-date);
+  border: 1.5px solid var(--color-navy);
+  color: var(--color-navy);
   font-family: var(--font-family);
   font-size: clamp(1.1rem, 2.5vw, 1.75rem);
   text-decoration: none;

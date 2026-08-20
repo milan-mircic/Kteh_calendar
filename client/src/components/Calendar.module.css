@@ -70,12 +70,13 @@
 
 .dateNumber {
   font-size: var(--font-size-date-number);
-  color: var(--color-date);
+  /* --color-date/--color-cyan are both light — nearly invisible against the
+     light --color-cell-fill-a/b backing. Navy holds ~8:1 contrast on both. */
+  color: var(--color-navy);
   line-height: 1;
 }
 
 .today .dateNumber {
-  color: var(--color-navy);
   font-weight: 700;
 }
 
@@ -88,10 +89,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-cyan);
+  border: 1px solid var(--color-navy);
   border-radius: 3px;
   background: none;
-  color: var(--color-cyan);
+  color: var(--color-navy);
   font-size: 0.9rem;
   line-height: 1;
   cursor: pointer;

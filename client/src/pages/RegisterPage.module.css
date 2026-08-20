@@ -17,7 +17,8 @@
   border-radius: 999px;
   background: var(--color-field-fill);
   border: none;
-  color: var(--color-cyan);
+  /* --color-cyan is nearly invisible against --color-field-fill (1.1:1). */
+  color: var(--color-navy);
   font-size: 1.5rem;
   cursor: pointer;
   display: flex;

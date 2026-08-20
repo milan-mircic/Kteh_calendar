@@ -75,7 +75,7 @@ export default function ActivityDetailPage() {
             <Link to={`/activity/${activity.id}/edit`}>
               <Button type="button">Edit</Button>
             </Link>
-            <Button type="button" className={styles.deleteButton} onClick={handleDelete} disabled={deleting}>
+            <Button type="button" onClick={handleDelete} disabled={deleting}>
               {deleting ? 'Deleting…' : 'Delete'}
             </Button>
           </div>
