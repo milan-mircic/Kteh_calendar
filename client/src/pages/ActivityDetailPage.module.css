@@ -66,20 +66,8 @@
   text-align: center;
 }
 
-.back {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 999px;
-  background: var(--color-text);
-  border: none;
-  color: var(--color-cyan);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.home {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
 }

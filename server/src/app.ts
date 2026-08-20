@@ -8,10 +8,12 @@ import { accountRouter } from './routes/account';
 import { quoteRouter } from './routes/quote';
 import { errorHandler } from './middleware/errorHandler';
 import { passport } from './lib/googleAuth';
+import { UPLOADS_DIR } from './lib/avatarUpload';
 
 export const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(express.json());
 app.use(cookieParser());
 // session: false everywhere — we authenticate via our own JWT cookie, not

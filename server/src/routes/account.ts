@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { Router } from 'express';
 import { z } from 'zod';
 import { authMiddleware } from '../middleware/auth';
+import { avatarUpload } from '../lib/avatarUpload';
 import { getUserByEmail, toPublicUser, updateUser } from '../lib/users';
 
 export const accountRouter = Router();
@@ -45,20 +46,22 @@ accountRouter.patch('/', async (req, res) => {
   res.json(toPublicUser(user));
 });
 
-// "URL to start" (§4) — a real upload pipeline is out of scope for now.
-const avatarSchema = z.object({ avatarUrl: z.string().url() });
-
 accountRouter.post('/avatar', (req, res) => {
-  const parsed = avatarSchema.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
-    return;
-  }
+  avatarUpload.single('avatar')(req, res, (err: unknown) => {
+    if (err) {
+      res.status(400).json({ error: err instanceof Error ? err.message : 'Invalid file' });
+      return;
+    }
+    if (!req.file) {
+      res.status(400).json({ error: 'No image file uploaded' });
+      return;
+    }
 
-  const user = updateUser(req.user!.id, { avatarUrl: parsed.data.avatarUrl });
-  if (!user) {
-    res.status(404).json({ error: 'Account not found' });
-    return;
-  }
-  res.json(toPublicUser(user));
+    const user = updateUser(req.user!.id, { avatarUrl: `/uploads/${req.file.filename}` });
+    if (!user) {
+      res.status(404).json({ error: 'Account not found' });
+      return;
+    }
+    res.json(toPublicUser(user));
+  });
 });
