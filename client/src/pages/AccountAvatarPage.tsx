@@ -1,51 +1,35 @@
-import { useEffect, useRef, useState, type ChangeEvent } from 'react';
+import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
-import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 import Button from '../components/Button';
+import Input from '../components/Input';
 import PersonIcon from '../components/PersonIcon';
 import { api, ApiError } from '../api';
 import { useAuth } from '../context/AuthContext';
-import { resolveAvatarUrl } from '../lib/avatar';
 import type { User } from '../types';
 import styles from './AccountAvatarPage.module.css';
 
-const ACCEPTED_TYPES = 'image/png,image/jpeg,image/gif,image/webp';
-
-// Figma: 25:1141 — route "/account/avatar". "Upload a new one" opens the
-// browser's native file-picker dialog; the upload starts as soon as a file
-// is chosen, with no separate on-page form step.
+// Figma: 25:1141 — route "/account/avatar". The API only accepts an avatar
+// URL for now (§4: "set avatar (URL to start)"), so this is a URL field
+// rather than a real file upload.
 export default function AccountAvatarPage() {
+  const navigate = useNavigate();
   const { user, login } = useAuth();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
-
   if (!user) return null;
 
-  async function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
-
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
     setError(null);
-    setPreviewUrl((current) => {
-      if (current) URL.revokeObjectURL(current);
-      return URL.createObjectURL(file);
-    });
-
     setSaving(true);
     try {
-      const formData = new FormData();
-      formData.append('avatar', file);
-      const updated = await api.postForm<User>('/api/account/avatar', formData);
+      const updated = await api.post<User>('/api/account/avatar', { avatarUrl });
       login(updated);
+      navigate('/account');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Something went wrong');
     } finally {
@@ -53,41 +37,33 @@ export default function AccountAvatarPage() {
     }
   }
 
-  const currentImage = previewUrl ?? resolveAvatarUrl(user.avatarUrl);
-
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/home.png" />
-      <HomeButton className={styles.home} />
+      <BackButton to="/account" className={styles.back} />
       <h1 className={styles.heading}>Change your profile picture</h1>
 
       <div className={styles.current}>
         <span className={styles.currentLabel}>Current:</span>
         <span className={styles.avatarPreview}>
-          {currentImage ? <img src={currentImage} alt="" /> : <PersonIcon />}
+          {user.avatarUrl ? <img src={user.avatarUrl} alt="" /> : <PersonIcon />}
         </span>
       </div>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept={ACCEPTED_TYPES}
-        className={styles.hiddenInput}
-        onChange={handleFileChange}
-        aria-hidden
-        tabIndex={-1}
-      />
-
-      {error && <p className={styles.error}>{error}</p>}
-
-      <Button
-        type="button"
-        className={styles.submit}
-        disabled={saving}
-        onClick={() => fileInputRef.current?.click()}
-      >
-        {saving ? 'Uploading…' : 'Upload a new one'}
-      </Button>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <Input
+          label="Image URL"
+          type="url"
+          placeholder="https://…"
+          required
+          value={avatarUrl}
+          onChange={(e) => setAvatarUrl(e.target.value)}
+        />
+        {error && <p className={styles.error}>{error}</p>}
+        <Button type="submit" className={styles.submit} disabled={saving}>
+          {saving ? 'Uploading…' : 'Upload a new one'}
+        </Button>
+      </form>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
-import HomeButton from '../components/HomeButton';
+import BackButton from '../components/BackButton';
 import Button from '../components/Button';
 import { useAuth } from '../context/AuthContext';
 import styles from './AccountPage.module.css';
@@ -20,7 +20,7 @@ export default function AccountPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/home.png" />
-      <HomeButton className={styles.home} />
+      <BackButton to="/home" className={styles.back} />
       <h1 className={styles.heading}>About me</h1>
 
       <div className={styles.card}>

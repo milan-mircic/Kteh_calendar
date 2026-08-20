@@ -17,7 +17,6 @@ server/data/*.db
 server/data/*.db-journal
 server/data/*.db-wal
 server/data/*.db-shm
-server/data/uploads/
 
 # Logs
 logs

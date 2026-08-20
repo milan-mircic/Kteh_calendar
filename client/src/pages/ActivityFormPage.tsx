@@ -1,7 +1,8 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
-import HomeButton from '../components/HomeButton';
+import TopBar from '../components/TopBar';
+import BackButton from '../components/BackButton';
 import IconButton from '../components/IconButton';
 import Input from '../components/Input';
 import SaveIcon from '../components/SaveIcon';
@@ -19,58 +20,6 @@ function splitDateTime(iso: string): { dateKey: string; time: string } {
   const date = new Date(iso);
   const time = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
   return { dateKey: toDateKey(date), time };
-}
-
-// Accepts typed times like "9:30" as well as "09:30" so the field isn't
-// limited to what the native time-picker widget hands back.
-const TIME_PATTERN = /^([01]?\d|2[0-3]):([0-5]\d)$/;
-
-function normalizeTime(value: string): string | null {
-  const match = TIME_PATTERN.exec(value.trim());
-  if (!match) return null;
-  return `${match[1].padStart(2, '0')}:${match[2]}`;
-}
-
-// Masks the time fields to "HH:MM" — the colon is inserted automatically
-// after the first two digits and can't be typed or deleted directly, so
-// typing is always exactly four digits split around a fixed separator.
-function timeDigits(value: string): string {
-  return value.replace(/\D/g, '').slice(0, 4);
-}
-
-function formatTimeDigits(digits: string): string {
-  return digits.length <= 2 ? digits : `${digits.slice(0, 2)}:${digits.slice(2)}`;
-}
-
-function handleTimeKeyDown(value: string, setValue: (next: string) => void) {
-  return (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-    if (e.key === 'Backspace') {
-      e.preventDefault();
-      setValue(formatTimeDigits(timeDigits(value).slice(0, -1)));
-      return;
-    }
-
-    if (/^\d$/.test(e.key)) {
-      e.preventDefault();
-      setValue(formatTimeDigits((timeDigits(value) + e.key).slice(0, 4)));
-      return;
-    }
-
-    if (e.key.length === 1) {
-      // Block every other printable key so the colon can't be edited by hand.
-      e.preventDefault();
-    }
-  };
-}
-
-function handleTimeChange(setValue: (next: string) => void) {
-  return (e: ChangeEvent<HTMLInputElement>) => {
-    // Sanitizes paste (the only way a value change reaches here without
-    // going through handleTimeKeyDown).
-    setValue(formatTimeDigits(timeDigits(e.target.value)));
-  };
 }
 
 // Figma: 35:1389 — routes "/activity/new", "/activity/:id/edit". The day cell
@@ -122,22 +71,14 @@ export default function ActivityFormPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
-
-    const normalizedStart = normalizeTime(startTime);
-    const normalizedEnd = normalizeTime(endTime);
-    if (!normalizedStart || !normalizedEnd) {
-      setError('Enter times as HH:MM (24-hour), e.g. 14:30');
-      return;
-    }
-
     setSaving(true);
     try {
       const payload = {
         title,
         description: description || undefined,
         location: location || undefined,
-        startAt: combineDateTime(dateKey, normalizedStart),
-        endAt: combineDateTime(dateKey, normalizedEnd),
+        startAt: combineDateTime(dateKey, startTime),
+        endAt: combineDateTime(dateKey, endTime),
       };
       const activity =
         isEditing && id
@@ -154,7 +95,7 @@ export default function ActivityFormPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/home.png" />
-      <HomeButton className={styles.home} />
+      <TopBar />
 
       {!loading && (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -196,37 +137,25 @@ export default function ActivityFormPage() {
               <Input
                 id="startTime"
                 label="Start"
-                type="text"
-                inputMode="numeric"
-                placeholder="HH:MM"
-                pattern="([01]?\d|2[0-3]):[0-5]\d"
-                title="Enter time as HH:MM, e.g. 14:30"
-                maxLength={5}
-                autoComplete="off"
+                type="time"
                 required
                 value={startTime}
-                onKeyDown={handleTimeKeyDown(startTime, setStartTime)}
-                onChange={handleTimeChange(setStartTime)}
+                onChange={(e) => setStartTime(e.target.value)}
               />
               <Input
                 id="endTime"
                 label="End"
-                type="text"
-                inputMode="numeric"
-                placeholder="HH:MM"
-                pattern="([01]?\d|2[0-3]):[0-5]\d"
-                title="Enter time as HH:MM, e.g. 14:30"
-                maxLength={5}
-                autoComplete="off"
+                type="time"
                 required
                 value={endTime}
-                onKeyDown={handleTimeKeyDown(endTime, setEndTime)}
-                onChange={handleTimeChange(setEndTime)}
+                onChange={(e) => setEndTime(e.target.value)}
               />
             </div>
           </div>
         </form>
       )}
+
+      <BackButton className={styles.back} aria-label="Cancel" />
     </div>
   );
 }

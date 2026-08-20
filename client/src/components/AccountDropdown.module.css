@@ -22,13 +22,6 @@
 .avatar {
   width: 3.75rem;
   height: 3.75rem;
-  overflow: hidden;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .greeting {
