@@ -43,6 +43,7 @@ if (googleAuthEnabled) {
 
           done(null, { id: user.id });
         } catch (err) {
+          console.error('[google strategy] verify callback failed:', err);
           done(err as Error);
         }
       },

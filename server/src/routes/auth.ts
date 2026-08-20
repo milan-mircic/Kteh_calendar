@@ -107,6 +107,7 @@ authRouter.get('/google/callback', (req, res, next) => {
     { session: false },
     (err: Error | null, user?: Express.User) => {
       if (err || !user) {
+        console.error('[google callback] auth failed:', err);
         res.redirect(`${process.env.CLIENT_URL}/login`);
         return;
       }
