@@ -34,7 +34,7 @@ export default function ActivityDetailPage() {
   }, [id]);
 
   async function handleDelete() {
-    if (!id || !window.confirm('Delete this activity?')) return;
+    if (!id) return;
     setDeleting(true);
     setError(null);
     try {

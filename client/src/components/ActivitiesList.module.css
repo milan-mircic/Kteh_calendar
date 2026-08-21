@@ -84,7 +84,7 @@
 }
 
 .emptyText {
-  color: var(--color-cyan);
+  color: var(--color-text);
   font-size: clamp(1.25rem, 2.5vw, 2rem);
   margin: 0;
 }

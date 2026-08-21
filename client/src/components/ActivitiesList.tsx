@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api, ApiError } from '../api';
 import type { Activity } from '../types';
-import { isSameDay, toMonthParam } from '../lib/calendar';
+import { isSameDay, toDateKey, toMonthParam } from '../lib/calendar';
 import { formatClock } from '../lib/date';
 import styles from './ActivitiesList.module.css';
 
@@ -30,10 +30,13 @@ function PlusSquareIcon() {
   );
 }
 
+type ActivitiesListProps = {
+  date: Date;
+};
+
 // Figma: Home — activities list (7:171, "Your activities") and empty state
-// (34:1232, "No activities, yet"). Shows today's agenda.
-export default function ActivitiesList() {
-  const today = useMemo(() => new Date(), []);
+// (34:1232, "No activities, yet"). Shows the agenda for `date`.
+export default function ActivitiesList({ date }: ActivitiesListProps) {
   const [activities, setActivities] = useState<Activity[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,7 +44,7 @@ export default function ActivitiesList() {
     let cancelled = false;
     setError(null);
     api
-      .get<Activity[]>(`/api/activities?month=${toMonthParam(today.getFullYear(), today.getMonth())}`)
+      .get<Activity[]>(`/api/activities?month=${toMonthParam(date.getFullYear(), date.getMonth())}`)
       .then((data) => {
         if (!cancelled) setActivities(data);
       })
@@ -51,14 +54,14 @@ export default function ActivitiesList() {
     return () => {
       cancelled = true;
     };
-  }, [today]);
+  }, [date]);
 
-  const todaysActivities = useMemo(
+  const dayActivities = useMemo(
     () =>
       (activities ?? [])
-        .filter((activity) => isSameDay(new Date(activity.startAt), today))
+        .filter((activity) => isSameDay(new Date(activity.startAt), date))
         .sort((a, b) => a.startAt.localeCompare(b.startAt)),
-    [activities, today],
+    [activities, date],
   );
 
   return (
@@ -71,19 +74,19 @@ export default function ActivitiesList() {
         </p>
       )}
 
-      {activities !== null && !error && todaysActivities.length === 0 && (
+      {activities !== null && !error && dayActivities.length === 0 && (
         <div className={styles.empty}>
           <p className={styles.emptyText}>No activities, yet</p>
-          <Link to="/activity/new" className={styles.addButton}>
+          <Link to={`/activity/new?date=${toDateKey(date)}`} className={styles.addButton}>
             Add activity
             <PlusSquareIcon />
           </Link>
         </div>
       )}
 
-      {todaysActivities.length > 0 && (
+      {dayActivities.length > 0 && (
         <ul className={styles.rows}>
-          {todaysActivities.map((activity, i) => (
+          {dayActivities.map((activity, i) => (
             <li key={activity.id}>
               <Link
                 to={`/activity/${activity.id}`}

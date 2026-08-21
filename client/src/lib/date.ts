@@ -23,10 +23,12 @@ export function formatOrdinalDate(iso: string): string {
 
 const WEEKDAY_FORMATTER = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
 
-// e.g. "Today, 20th August, Thursday" — used above the home quote.
-export function formatTodayHeading(date: Date): string {
+// e.g. "Today, 20th August, Thursday", or "20th August, Thursday" for any
+// other selected day — used above the home quote.
+export function formatDayHeading(date: Date, isToday: boolean): string {
   const day = date.getDate();
-  return `Today, ${day}${ordinalSuffix(day)} ${MONTH_FORMATTER.format(date)}, ${WEEKDAY_FORMATTER.format(date)}`;
+  const rest = `${day}${ordinalSuffix(day)} ${MONTH_FORMATTER.format(date)}, ${WEEKDAY_FORMATTER.format(date)}`;
+  return isToday ? `Today, ${rest}` : rest;
 }
 
 const TIME_FORMATTER = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' });

@@ -8,8 +8,13 @@ import styles from './Calendar.module.css';
 const MONTH_FORMATTER = new Intl.DateTimeFormat('en-US', { month: 'long' });
 const MAX_VISIBLE_ACTIVITIES = 2;
 
+type CalendarProps = {
+  selectedDate: Date;
+  onSelectDate: (date: Date) => void;
+};
+
 // Figma: Home — calendar section (30:1239)
-export default function Calendar() {
+export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) {
   const today = useMemo(() => new Date(), []);
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth());
@@ -102,13 +107,21 @@ export default function Calendar() {
             rowIndex % 2 === 1 && styles.cellAlt,
             !isCurrentMonth && styles.cellDimmed,
             isSameDay(date, today) && styles.today,
+            isSameDay(date, selectedDate) && styles.selected,
           ]
             .filter(Boolean)
             .join(' ');
 
           return (
             <div key={dateKey} className={cellClassName}>
-              <span className={styles.dateNumber}>{date.getDate()}</span>
+              <button
+                type="button"
+                className={styles.dateNumber}
+                onClick={() => onSelectDate(date)}
+                aria-label={`Show activities for ${dateKey}`}
+              >
+                {date.getDate()}
+              </button>
               <Link
                 to={`/activity/new?date=${dateKey}`}
                 className={styles.addButton}

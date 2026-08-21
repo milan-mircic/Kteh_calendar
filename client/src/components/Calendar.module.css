@@ -68,12 +68,31 @@
   opacity: 0.45;
 }
 
+.selected {
+  outline: var(--cell-border-width) solid var(--color-cyan);
+  outline-offset: calc(-1 * var(--cell-border-width));
+}
+
 .dateNumber {
+  font-family: var(--font-family);
   font-size: var(--font-size-date-number);
   /* --color-date/--color-cyan are both light — nearly invisible against the
      light --color-cell-fill-a/b backing. Navy holds ~8:1 contrast on both. */
   color: var(--color-navy);
   line-height: 1;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dateNumber:hover {
+  opacity: 0.75;
+}
+
+.dateNumber:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
 }
 
 .today .dateNumber {
