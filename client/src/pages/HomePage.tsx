@@ -1,5 +1,6 @@
 import PageBackground from '../components/PageBackground';
 import Calendar from '../components/Calendar';
+import DateHeading from '../components/DateHeading';
 import Quote from '../components/Quote';
 import TopBar from '../components/TopBar';
 import ActivitiesList from '../components/ActivitiesList';
@@ -15,6 +16,7 @@ export default function HomePage() {
       <TopBar />
 
       <section className={styles.section}>
+        <DateHeading />
         <Quote />
       </section>
 

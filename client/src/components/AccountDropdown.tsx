@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { resolveAvatarUrl } from '../lib/avatar';
 import PersonIcon from './PersonIcon';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './AccountDropdown.module.css';
@@ -13,6 +14,7 @@ export default function AccountDropdown() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const avatarUrl = resolveAvatarUrl(user?.avatarUrl ?? null);
 
   useEffect(() => {
     if (!open) return;
@@ -55,7 +57,7 @@ export default function AccountDropdown() {
         aria-expanded={open}
       >
         <span className={[iconButtonStyles.iconButton, iconButtonStyles.outline, styles.avatar].join(' ')}>
-          <PersonIcon />
+          {avatarUrl ? <img src={avatarUrl} alt="" className={styles.avatarImage} /> : <PersonIcon />}
         </span>
         <span className={styles.greeting}>Hi, {user?.firstName ?? 'there'}</span>
       </button>
