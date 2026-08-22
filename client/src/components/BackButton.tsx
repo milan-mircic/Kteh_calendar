@@ -2,8 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './BackButton.module.css';
 
-// Figma: "Back button" (22:130 on Log in, 2:4) — circular back-navigation control.
-// Navigates to `to` if given, otherwise goes back one entry in history.
+// Dugme za nazad, prvobitno u upotrebi, kasnije zamenjeno "home" dugmetom.
 type BackButtonProps = {
   to?: string;
   className?: string;

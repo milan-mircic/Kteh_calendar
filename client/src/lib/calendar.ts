@@ -1,10 +1,11 @@
+// Definise funkcije i konstante koji se koriste u calendar.tsx i activieslist.tsx
+
+
 export interface CalendarDay {
   date: Date;
   isCurrentMonth: boolean;
 }
 
-// Monday-first month grid: leading/trailing days from adjacent months fill
-// out full weeks (§6 gotcha: `(getDay()+6)%7` offset).
 export function getMonthGrid(year: number, month: number): CalendarDay[] {
   const firstOfMonth = new Date(year, month, 1);
   const leadingOffset = (firstOfMonth.getDay() + 6) % 7;

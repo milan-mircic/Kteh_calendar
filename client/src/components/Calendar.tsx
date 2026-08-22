@@ -5,10 +5,20 @@ import type { Activity } from '../types';
 import { getMonthGrid, isSameDay, toDateKey, toMonthParam, WEEKDAY_LABELS } from '../lib/calendar';
 import styles from './Calendar.module.css';
 
+
+// Kompletan prikaz kalendara
+
+
+// Ucitava naziv meseca 
 const MONTH_FORMATTER = new Intl.DateTimeFormat('en-US', { month: 'long' });
+
+// Mozda promeniti na vise, 2 je ok da jedno polje ne izgleda prenatrpano
 const MAX_VISIBLE_ACTIVITIES = 2;
 
-// Figma: Home — calendar section (30:1239)
+
+
+// Preuzimanje podataka
+
 export default function Calendar() {
   const today = useMemo(() => new Date(), []);
   const [year, setYear] = useState(today.getFullYear());
@@ -32,6 +42,8 @@ export default function Calendar() {
     };
   }, [year, month]);
 
+  // Raporedjivanje po danima
+
   const activitiesByDay = useMemo(() => {
     const map = new Map<string, Activity[]>();
     for (const activity of activities) {
@@ -44,6 +56,8 @@ export default function Calendar() {
   }, [activities]);
 
   const days = useMemo(() => getMonthGrid(year, month), [year, month]);
+
+// Prebacivanje na prethodni i sledeci mesec
 
   function goToPreviousMonth() {
     if (month === 0) {
@@ -91,6 +105,8 @@ export default function Calendar() {
           </span>
         ))}
       </div>
+
+{/* Deli se sa 7 samo zbog dizajna, nema ulogu u funkcionalnosti */}
 
       <div className={styles.grid}>
         {days.map(({ date, isCurrentMonth }, i) => {

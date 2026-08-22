@@ -1,5 +1,4 @@
-// Figma: "Generic avatar" (Material 3 Design Kit) — reused by the account
-// menu trigger and the profile picture screen's current-avatar preview.
+// Genericna profilna slika
 export default function PersonIcon() {
   return (
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden focusable="false">

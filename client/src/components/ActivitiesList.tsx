@@ -6,6 +6,8 @@ import { isSameDay, toMonthParam } from '../lib/calendar';
 import { formatClock } from '../lib/date';
 import styles from './ActivitiesList.module.css';
 
+// Prikazivanje danasnjih akttivnosti
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden focusable="false">
@@ -30,8 +32,7 @@ function PlusSquareIcon() {
   );
 }
 
-// Figma: Home — activities list (7:171, "Your activities") and empty state
-// (34:1232, "No activities, yet"). Shows today's agenda.
+
 export default function ActivitiesList() {
   const today = useMemo(() => new Date(), []);
   const [activities, setActivities] = useState<Activity[] | null>(null);

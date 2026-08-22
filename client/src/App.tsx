@@ -13,6 +13,9 @@ import AccountPage from './pages/AccountPage';
 import AccountEditPage from './pages/AccountEditPage';
 import AccountAvatarPage from './pages/AccountAvatarPage';
 
+// Definisane putanje do stranica
+
+
 export default function App() {
   return (
     <AuthProvider>

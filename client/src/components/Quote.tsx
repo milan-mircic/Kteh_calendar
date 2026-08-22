@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getSessionQuote } from '../lib/quote';
 import styles from './Quote.module.css';
 
-// Figma: quote line under the home greeting heading (7:171)
+// Komponenta za prikazivanje motivacionih poruka
 export default function Quote() {
   const [quote, setQuote] = useState<{ content: string; author: string } | null>(null);
 
@@ -13,7 +13,7 @@ export default function Quote() {
         if (!cancelled) setQuote(data);
       })
       .catch(() => {
-        // Quote is decorative; fail silently rather than blocking the page.
+        // Ukoliko dodje do greske u ucitavanju poruke, ostatak stranice se i dalje ucitava
       });
     return () => {
       cancelled = true;

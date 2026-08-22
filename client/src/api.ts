@@ -13,8 +13,6 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const isFormData = options?.body instanceof FormData;
   const res = await fetch(`${API_URL}${path}`, {
     credentials: 'include',
-    // Omit Content-Type for FormData so the browser sets the multipart
-    // boundary itself — a fixed "application/json" header would break it.
     headers: isFormData ? undefined : { 'Content-Type': 'application/json' },
     ...options,
   });

@@ -6,7 +6,6 @@ import Button from '../components/Button';
 import { api, ApiError } from '../api';
 import styles from './ForgotPasswordPage.module.css';
 
-// Figma: 7:169 — route "/forgot-password"
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);

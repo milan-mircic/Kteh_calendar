@@ -1,3 +1,5 @@
+// Editovanje podataka
+
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
@@ -10,8 +12,6 @@ import { useAuth } from '../context/AuthContext';
 import type { User } from '../types';
 import styles from './AccountEditPage.module.css';
 
-// Figma: 22:1520 — route "/account/edit". No date field on the activity form
-// but this screen does have one, matching the Register screen's date input.
 export default function AccountEditPage() {
   const navigate = useNavigate();
   const { user, login } = useAuth();

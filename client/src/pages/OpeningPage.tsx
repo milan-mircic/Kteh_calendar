@@ -6,7 +6,6 @@ import buttonStyles from '../components/Button.module.css';
 import { API_URL } from '../api';
 import styles from './OpeningPage.module.css';
 
-// Figma: 1:1054 — route "/" (logged out)
 export default function OpeningPage() {
   return (
     <div className={styles.page}>

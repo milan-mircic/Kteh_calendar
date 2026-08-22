@@ -8,7 +8,6 @@ import { useAuth } from '../context/AuthContext';
 import type { User } from '../types';
 import styles from './LoginPage.module.css';
 
-// Figma: 2:4 — route "/login"
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();

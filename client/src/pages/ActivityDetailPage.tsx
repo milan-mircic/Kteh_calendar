@@ -1,3 +1,5 @@
+// Prikazivanje detalja sacuvane aktivnosti sa handleovanjem brisanja 
+
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
@@ -8,7 +10,6 @@ import type { Activity } from '../types';
 import { formatOrdinalDate, formatTimeRange } from '../lib/date';
 import styles from './ActivityDetailPage.module.css';
 
-// Figma: 37:1309 — route "/activity/:id"
 export default function ActivityDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
