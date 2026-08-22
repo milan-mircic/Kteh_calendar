@@ -1,3 +1,5 @@
+// Ova stranica samo prikazuje vec unete podatke o korisniku
+
 import { Link } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
 import HomeButton from '../components/HomeButton';
@@ -12,7 +14,6 @@ const PURPOSE_LABELS: Record<string, string> = {
   other: 'Other',
 };
 
-// Figma: 22:29 — route "/account"
 export default function AccountPage() {
   const { user } = useAuth();
   if (!user) return null;

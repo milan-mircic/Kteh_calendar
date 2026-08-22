@@ -1,8 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
 import styles from './Input.module.css';
 
-// Figma: "Input filed - thin" (7:110, Register 7:174) and
-// "Input filed - large" (7:155, Log in 2:4).
+// Input polje
 type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   label?: string;
   size?: 'thin' | 'large';

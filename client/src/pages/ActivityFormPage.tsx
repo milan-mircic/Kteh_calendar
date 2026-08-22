@@ -11,6 +11,9 @@ import { toDateKey } from '../lib/calendar';
 import { formatOrdinalDate } from '../lib/date';
 import styles from './ActivityFormPage.module.css';
 
+
+// Od linije 17 do 69 sav kod se bavi procesuiranjem unesenog vremena.
+
 function combineDateTime(dateKey: string, time: string): string {
   return new Date(`${dateKey}T${time}`).toISOString();
 }
@@ -21,8 +24,6 @@ function splitDateTime(iso: string): { dateKey: string; time: string } {
   return { dateKey: toDateKey(date), time };
 }
 
-// Accepts typed times like "9:30" as well as "09:30" so the field isn't
-// limited to what the native time-picker widget hands back.
 const TIME_PATTERN = /^([01]?\d|2[0-3]):([0-5]\d)$/;
 
 function normalizeTime(value: string): string | null {
@@ -31,9 +32,6 @@ function normalizeTime(value: string): string | null {
   return `${match[1].padStart(2, '0')}:${match[2]}`;
 }
 
-// Masks the time fields to "HH:MM" — the colon is inserted automatically
-// after the first two digits and can't be typed or deleted directly, so
-// typing is always exactly four digits split around a fixed separator.
 function timeDigits(value: string): string {
   return value.replace(/\D/g, '').slice(0, 4);
 }
@@ -59,7 +57,6 @@ function handleTimeKeyDown(value: string, setValue: (next: string) => void) {
     }
 
     if (e.key.length === 1) {
-      // Block every other printable key so the colon can't be edited by hand.
       e.preventDefault();
     }
   };
@@ -67,15 +64,10 @@ function handleTimeKeyDown(value: string, setValue: (next: string) => void) {
 
 function handleTimeChange(setValue: (next: string) => void) {
   return (e: ChangeEvent<HTMLInputElement>) => {
-    // Sanitizes paste (the only way a value change reaches here without
-    // going through handleTimeKeyDown).
     setValue(formatTimeDigits(timeDigits(e.target.value)));
   };
 }
 
-// Figma: 35:1389 — routes "/activity/new", "/activity/:id/edit". The day cell
-// a "+" was clicked from sets ?date=; editing keeps the activity's own date
-// (there's no date field in the design — only start/end time).
 export default function ActivityFormPage() {
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();

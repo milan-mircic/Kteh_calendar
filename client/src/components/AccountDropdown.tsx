@@ -6,8 +6,8 @@ import PersonIcon from './PersonIcon';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './AccountDropdown.module.css';
 
-// Figma: Profil_Main (44:2595) trigger + "Main screen - account dropdown" open
-// state (44:2589) — "My account" / "Log out" / "Profile picture" menu.
+// Dropdown meni sa korisnickim podacima
+// Slika, logout, podaci
 
 export default function AccountDropdown() {
   const { user, logout } = useAuth();

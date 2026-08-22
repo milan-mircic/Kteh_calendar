@@ -1,8 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import styles from './IconButton.module.css';
 
-// Figma: Material "Icon button" (22:1018 family) — circular action button.
-// Used as the base for BackButton and the account-menu trigger.
+// Osnova od koje je napravljeno home dugme, dugme za dropdown sa informacijama o profilu i, prethodno korisceno, back dugme
 type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'filled' | 'outline';
 };

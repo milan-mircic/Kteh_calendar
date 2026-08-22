@@ -1,5 +1,4 @@
-// Figma: "Save" (Simple Design System) — the floppy-disk icon used inside
-// the circular save button on the activity form and account edit screens.
+// Ikonica za cuvanje izmena
 export default function SaveIcon() {
   return (
     <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden focusable="false">

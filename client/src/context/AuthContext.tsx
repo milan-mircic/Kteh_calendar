@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { api, ApiError } from '../api';
 import type { User } from '../types';
 
-// Owned by Person 2 (Phase 2): loads /api/auth/me on mount, exposes user + login/logout.
+// Sluzi da obradi i sacuva informaciju da li je login uspesan ili ne
 interface AuthContextValue {
   user: User | null;
   loading: boolean;
@@ -21,7 +21,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .get<User>('/api/auth/me')
       .then(setUser)
       .catch((err) => {
-        // A 401 just means "not signed in" — anything else is worth logging.
         if (!(err instanceof ApiError) || err.status !== 401) {
           console.error('Failed to load session', err);
         }

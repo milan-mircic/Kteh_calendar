@@ -1,3 +1,5 @@
+// Proces uploadovanja i cuvanja profilne slike
+
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import PageBackground from '../components/PageBackground';
 import HomeButton from '../components/HomeButton';
@@ -9,11 +11,11 @@ import { resolveAvatarUrl } from '../lib/avatar';
 import type { User } from '../types';
 import styles from './AccountAvatarPage.module.css';
 
+
+// Ova provera je samo na nivou fronta, odvojen proces upload-a je u backend-u
 const ACCEPTED_TYPES = 'image/png,image/jpeg,image/gif,image/webp';
 
-// Figma: 25:1141 — route "/account/avatar". "Upload a new one" opens the
-// browser's native file-picker dialog; the upload starts as soon as a file
-// is chosen, with no separate on-page form step.
+
 export default function AccountAvatarPage() {
   const { user, login } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);

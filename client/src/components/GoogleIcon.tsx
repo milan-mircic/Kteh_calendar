@@ -1,6 +1,4 @@
-// Figma: "google" (25:1223) on the Opening screen (1:1054) — Google's
-// official 4-color "G" mark, inlined so it doesn't depend on Figma's
-// short-lived asset URLs.
+// Logo za google, sa figme
 export default function GoogleIcon({ size = 28 }: { size?: number }) {
   return (
     <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden focusable="false">

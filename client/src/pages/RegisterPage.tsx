@@ -8,7 +8,6 @@ import { useAuth } from '../context/AuthContext';
 import type { User } from '../types';
 import styles from './RegisterPage.module.css';
 
-// Figma: 7:174 — route "/register"
 export default function RegisterPage() {
   const navigate = useNavigate();
   const { login } = useAuth();

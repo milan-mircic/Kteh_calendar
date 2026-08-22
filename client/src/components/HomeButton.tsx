@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import iconButtonStyles from './IconButton.module.css';
 import styles from './HomeButton.module.css';
 
-// Circular home-navigation control, styled to match BackButton.
+// Naknadno uvedeno home dugme, koje sa bilo koje stranice vraca na glavnu stranicu sa aktivnostima
+// Napravljeno da zameni manje funkcionalno back dugme.
 type HomeButtonProps = {
   to?: string;
   className?: string;

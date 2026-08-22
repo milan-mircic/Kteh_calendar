@@ -3,7 +3,7 @@ import AccountDropdown from './AccountDropdown';
 import { formatClock } from '../lib/date';
 import styles from './TopBar.module.css';
 
-// Figma: Home top bar — Profil_Main (44:2595, greeting) + Time_stamp (44:2596, clock)
+// Ucitava "gornji" deo stranice gde se nalaze pozdrav korisniku, trenutno vreme i profilna slika cijim se klikom otvara dropdown meni
 export default function TopBar() {
   const [now, setNow] = useState(() => new Date());
 
