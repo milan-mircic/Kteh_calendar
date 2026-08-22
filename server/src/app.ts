@@ -16,11 +16,7 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(express.json());
 app.use(cookieParser());
-// session: false everywhere — we authenticate via our own JWT cookie, not
-// passport sessions, but passport.initialize() is still required to make
-// passport.authenticate(...) usable in the Google OAuth routes.
 app.use(passport.initialize());
-
 app.use('/api', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/activities', activitiesRouter);

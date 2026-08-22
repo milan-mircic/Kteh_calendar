@@ -19,7 +19,6 @@ const monthQuerySchema = z.object({
   month: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'month must be in YYYY-MM format'),
 });
 
-// Person 1 (Phase 3)
 activitiesRouter.get('/', (req, res) => {
   const parsed = monthQuerySchema.safeParse(req.query);
   if (!parsed.success) {

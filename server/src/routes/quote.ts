@@ -7,8 +7,7 @@ interface ZenQuote {
   a: string;
 }
 
-// Person 1 (Phase 5) — proxy ZenQuotes; never call it from the browser directly
-// (it blocks CORS and rate-limits by IP).
+//  Preuzimanje motivacionih poruka
 quoteRouter.get('/random', async (_req, res) => {
   try {
     const response = await fetch('https://zenquotes.io/api/random');

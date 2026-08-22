@@ -60,7 +60,7 @@ export interface NewGoogleUser {
   lastName: string;
 }
 
-// password_hash stays NULL — this account can only sign in via Google.
+//Hash za sifru ostaje nula - google korisnik
 export function createGoogleUser(input: NewGoogleUser): UserRow {
   db.prepare(
     `INSERT INTO users (id, email, google_id, first_name, last_name)
@@ -69,8 +69,7 @@ export function createGoogleUser(input: NewGoogleUser): UserRow {
   return getUserById(input.id)!;
 }
 
-// A Google sign-in whose email matches an existing password account links
-// to it (§7 gotcha) rather than creating a duplicate user.
+// Sprecava logovanje dva naloga sa istim mejlom nezavisno od toga da li je koriscen google sso ili je rucno kreiran korisnik
 export function linkGoogleAccount(userId: string, googleId: string): void {
   db.prepare('UPDATE users SET google_id = ? WHERE id = ?').run(googleId, userId);
 }
@@ -105,7 +104,6 @@ export function updateUser(id: string, patch: UserPatch): UserRow | undefined {
   return getUserById(id);
 }
 
-// Never send password_hash to the client.
 export function toPublicUser(row: UserRow): User {
   return {
     id: row.id,
