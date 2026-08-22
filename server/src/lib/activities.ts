@@ -25,8 +25,6 @@ export function toPublicActivity(row: ActivityRow): Activity {
   };
 }
 
-// `month` is "YYYY-MM". ISO datetimes sort lexicographically, so a plain
-// string range comparison is enough to bucket by month.
 export function listActivitiesForMonth(userId: string, month: string): ActivityRow[] {
   const [yearStr, monthStr] = month.split('-');
   const year = Number(yearStr);
@@ -86,8 +84,6 @@ export interface ActivityPatch {
   endAt?: string;
 }
 
-// Returns undefined when the activity doesn't exist (or belongs to another
-// user) so the route can respond 404 without a separate existence check.
 export function updateActivity(userId: string, id: string, patch: ActivityPatch): ActivityRow | undefined {
   const existing = getActivityById(userId, id);
   if (!existing) return undefined;

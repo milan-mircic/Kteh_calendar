@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
 
-// Served statically at /uploads (see app.ts).
 export const UPLOADS_DIR = path.join(__dirname, '../../data/uploads');
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 

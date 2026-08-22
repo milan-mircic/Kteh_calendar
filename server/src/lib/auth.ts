@@ -16,8 +16,7 @@ export function verifyToken(token: string): JwtPayload {
   return jwt.verify(token, JWT_SECRET) as JwtPayload;
 }
 
-// Shared by email/password login and the Google OAuth callback so both
-// issue an identical cookie.
+// Isti cookie se dodeljuje nezavisno od toga kako je korisnik ulogovan (google ili regularno)
 export function setAuthCookie(res: Response, payload: JwtPayload): void {
   const token = signToken(payload);
   res.cookie(COOKIE_NAME, token, {

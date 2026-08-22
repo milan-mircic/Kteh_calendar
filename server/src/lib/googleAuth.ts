@@ -3,8 +3,6 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy, type Profile } from 'passport-google-oauth20';
 import { createGoogleUser, getUserByEmail, getUserByGoogleId, linkGoogleAccount } from './users';
 
-// Only register the strategy when credentials are configured, so the app
-// still boots in dev without a Google Cloud project set up (§8).
 export const googleAuthEnabled = Boolean(
   process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET,
 );

@@ -117,8 +117,7 @@ authRouter.get('/google/callback', (req, res, next) => {
   )(req, res, next);
 });
 
-// Stub — log a reset link, no real email (out of scope). TODO: send a real
-// password-reset email once the app has an email provider.
+//Proveriti da li radi
 const forgotPasswordSchema = z.object({ email: z.string().email() });
 
 authRouter.post('/forgot-password', (req, res) => {
