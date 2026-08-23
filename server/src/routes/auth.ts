@@ -4,8 +4,10 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { authMiddleware } from '../middleware/auth';
 import { setAuthCookie, clearAuthCookie } from '../lib/auth';
-import { createUser, getUserByEmail, getUserById, toPublicUser } from '../lib/users';
+import { createUser, getUserByEmail, getUserById, toPublicUser, updateUser } from '../lib/users';
 import { googleAuthEnabled, passport } from '../lib/googleAuth';
+import { sendPasswordResetEmail } from '../lib/email';
+import { consumePasswordReset, createPasswordReset, getValidPasswordReset } from '../lib/passwordResets';
 
 export const authRouter = Router();
 
@@ -117,17 +119,44 @@ authRouter.get('/google/callback', (req, res, next) => {
   )(req, res, next);
 });
 
-//Proveriti da li radi
 const forgotPasswordSchema = z.object({ email: z.string().email() });
 
-authRouter.post('/forgot-password', (req, res) => {
+authRouter.post('/forgot-password', async (req, res) => {
   const parsed = forgotPasswordSchema.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
     return;
   }
 
-  const resetToken = randomUUID();
-  console.log(`[forgot-password] reset link for ${parsed.data.email}: /reset-password?token=${resetToken}`);
+  const user = getUserByEmail(parsed.data.email);
+  if (user) {
+    const token = createPasswordReset(user.id);
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+    await sendPasswordResetEmail(user.email, resetUrl);
+  }
+  res.status(204).end();
+});
+
+const resetPasswordSchema = z.object({
+  token: z.string().min(1),
+  newPassword: z.string().min(8),
+});
+
+authRouter.post('/reset-password', async (req, res) => {
+  const parsed = resetPasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.issues[0]?.message ?? 'Invalid input' });
+    return;
+  }
+
+  const userId = getValidPasswordReset(parsed.data.token);
+  if (!userId) {
+    res.status(400).json({ error: 'This reset link is invalid or has expired' });
+    return;
+  }
+
+  const passwordHash = await bcrypt.hash(parsed.data.newPassword, 12);
+  updateUser(userId, { passwordHash });
+  consumePasswordReset(parsed.data.token);
   res.status(204).end();
 });

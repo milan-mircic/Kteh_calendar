@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import OpeningPage from './pages/OpeningPage';
 import LoginPage from './pages/LoginPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ActivityDetailPage from './pages/ActivityDetailPage';
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/" element={<OpeningPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/home" element={<HomePage />} />
