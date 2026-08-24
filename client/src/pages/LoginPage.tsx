@@ -34,9 +34,6 @@ export default function LoginPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/login.png" />
-      <Link to="/" className={styles.back} aria-label="Back">
-        ‹
-      </Link>
       <h1 className={styles.heading}>Log in</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input

@@ -8,25 +8,6 @@
   gap: 2rem;
 }
 
-.back {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 999px;
-  background: var(--color-field-fill);
-  border: none;
-  /* --color-cyan is nearly invisible against --color-field-fill (1.1:1). */
-  color: var(--color-navy);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
 .heading {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 400;
