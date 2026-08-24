@@ -4,57 +4,56 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem 4rem;
-  gap: 2rem;
+  padding: 2rem 1rem 4rem; /* 32px 16px 64px at 1440px */
+  gap: 2rem; /* 32px at 1440px */
 }
 
 .heading {
   font-size: var(--font-size-month-title);
   font-weight: 400;
   text-align: center;
-  margin: 3rem 0 0;
+  margin: 3rem 0 0; /* 48px at 1440px */
 }
 
 .card {
-  width: min(90vw, 57rem);
+  width: min(90vw, 57rem); /* 912px at 1440px */
   background: rgba(53, 227, 233, 0.5);
   border: 1px solid var(--color-cyan);
-  padding: 2rem;
+  padding: 2rem; /* 32px at 1440px */
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.25rem; /* 20px at 1440px */
 }
 
 .titleRow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.5rem; /* 24px at 1440px */
   color: var(--color-navy);
   font-weight: 600;
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem); /* 40px at 1440px */
 }
 
 .location {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  /* --color-text is nearly invisible against the card's cyan-tinted fill. */
+  gap: 0.5rem; /* 8px at 1440px */
   color: var(--color-navy);
   font-weight: 600;
-  font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.1rem, 2.5vw, 1.75rem); /* 28px at 1440px */
 }
 
 .description {
   color: var(--color-navy);
   font-weight: 600;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1.25rem); /* 20px at 1440px */
   white-space: pre-wrap;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 1rem; /* 16px at 1440px */
   justify-content: flex-end;
 }
 
@@ -65,16 +64,15 @@
 
 .back {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
+  bottom: 1.5rem; /* 24px at 1440px */
+  right: 1.5rem; /* 24px at 1440px */
+  width: 3rem; /* 48px at 1440px */
+  height: 3rem; /* 48px at 1440px */
   border-radius: 999px;
   background: var(--color-text);
   border: none;
-  /* --color-cyan is nearly invisible against --color-text. */
   color: var(--color-navy);
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* 24px at 1440px */
   cursor: pointer;
   display: flex;
   align-items: center;

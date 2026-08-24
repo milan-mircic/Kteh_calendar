@@ -4,28 +4,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem 4rem;
-  gap: 2rem;
+  padding: 2rem 1rem 4rem; /* 32px 16px 64px at 1440px */
+  gap: 2rem; /* 32px at 1440px */
 }
 
 .home {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1.5rem; /* 24px at 1440px */
+  left: 1.5rem; /* 24px at 1440px */
 }
 
 .heading {
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 4rem); /* 64px at 1440px */
   font-weight: 400;
   text-align: center;
-  margin: 3rem 0 0;
+  margin: 3rem 0 0; /* 48px at 1440px */
 }
 
 .current {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1rem; /* 16px at 1440px */
 }
 
 .currentLabel {
@@ -34,12 +34,10 @@
 }
 
 .avatarPreview {
-  width: 8rem;
-  height: 8rem;
-  border-radius: 1.5rem;
+  width: 8rem; /* 128px at 1440px */
+  height: 8rem; /* 128px at 1440px */
+  border-radius: 1.5rem; /* 24px at 1440px */
   background: var(--color-field-fill);
-  /* --color-cyan is nearly invisible against --color-field-fill (1.1:1).
-     Navy holds ~8.7:1. */
   color: var(--color-navy);
   display: flex;
   align-items: center;
@@ -69,5 +67,5 @@
 
 .submit {
   align-self: center;
-  min-width: 12rem;
+  min-width: 12rem; /* 192px at 1440px */
 }
