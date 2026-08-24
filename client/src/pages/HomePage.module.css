@@ -1,10 +1,10 @@
 .page {
   position: relative;
   min-height: 100svh;
-  padding: 2rem 1rem 4rem;
+  padding: 2rem 1rem 4rem; /* 32px 16px 64px at 1440px */
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 3rem; /* 48px at 1440px */
 }
 
 .section {

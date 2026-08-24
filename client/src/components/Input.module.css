@@ -7,7 +7,7 @@
 
 .label {
   color: var(--color-text);
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* 17.6px at 1440px */
   font-weight: 600;
 }
 
@@ -29,7 +29,6 @@
   outline-offset: 2px;
 }
 
-/* Figma: "Input filed - large" (node 7:155) on the Log in screen (2:4) */
 .large {
   font-size: clamp(1.25rem, 2.5vw, 3rem); /* 48px at 1440px */
   border: 2px solid var(--color-cyan);

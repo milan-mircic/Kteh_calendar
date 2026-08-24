@@ -1,12 +1,10 @@
 .iconButton {
   flex-shrink: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 3rem; /* 48px at 1440px */
+  height: 3rem; /* 48px at 1440px */
   border: none;
   border-radius: 999px;
   background: var(--color-field-fill);
-  /* --color-cyan is nearly invisible against --color-field-fill (1.1:1).
-     Navy holds ~8.7:1. */
   color: var(--color-navy);
   display: flex;
   align-items: center;

@@ -3,23 +3,23 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem 6rem;
-  gap: 2rem;
+  padding: 2rem 1rem 6rem; /* 32px 16px 96px at 1440px */
+  gap: 2rem; /* 32px at 1440px */
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  width: min(90vw, 60rem);
-  margin: 2rem auto 0;
+  gap: 2rem; /* 32px at 1440px */
+  width: min(90vw, 60rem); /* 960px at 1440px */
+  margin: 2rem auto 0; /* 32px at 1440px */
 }
 
 .headingRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1rem; /* 16px at 1440px */
 }
 
 .heading {
@@ -35,12 +35,12 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2rem; /* 32px at 1440px */
 }
 
 .row > * {
   flex: 1;
-  min-width: 14rem;
+  min-width: 14rem; /* 224px at 1440px */
 }
 
 .field {
@@ -51,7 +51,7 @@
 
 .label {
   color: var(--color-text);
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* 17.6px at 1440px */
   font-weight: 600;
   font-family: var(--font-family);
 }
@@ -63,7 +63,7 @@
   border: 1px solid var(--color-cyan);
   border-radius: 8px;
   padding: 0.75em 1em;
-  min-height: 8rem;
+  min-height: 8rem; /* 128px at 1440px */
   resize: vertical;
   box-sizing: border-box;
 }
@@ -76,16 +76,16 @@
 .times {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2rem; /* 32px at 1440px */
 }
 
 .times > * {
   flex: 1;
-  min-width: 10rem;
+  min-width: 10rem; /* 160px at 1440px */
 }
 
 .home {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1.5rem; /* 24px at 1440px */
+  left: 1.5rem; /* 24px at 1440px */
 }
