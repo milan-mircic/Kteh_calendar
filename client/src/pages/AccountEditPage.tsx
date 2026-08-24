@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
-import BackButton from '../components/BackButton';
+import HomeButton from '../components/HomeButton';
 import IconButton from '../components/IconButton';
 import Input from '../components/Input';
 import SaveIcon from '../components/SaveIcon';
@@ -59,7 +59,7 @@ export default function AccountEditPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/home.png" />
-      <BackButton to="/account" className={styles.back} />
+      <HomeButton className={styles.home} />
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.headingRow}>
