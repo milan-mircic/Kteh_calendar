@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PageBackground from '../components/PageBackground';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -57,9 +57,6 @@ export default function RegisterPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/register.png" />
-      <Link to="/" className={styles.back} aria-label="Back">
-        ‹
-      </Link>
       <h1 className={styles.heading}>Create an account</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input

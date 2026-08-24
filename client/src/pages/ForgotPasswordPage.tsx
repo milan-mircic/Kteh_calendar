@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react';
 import PageBackground from '../components/PageBackground';
-import BackButton from '../components/BackButton';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { api, ApiError } from '../api';
@@ -29,7 +28,6 @@ export default function ForgotPasswordPage() {
   return (
     <div className={styles.page}>
       <PageBackground src="/backgrounds/forgot-password.png" />
-      <BackButton to="/login" className={styles.back} />
       <h1 className={styles.heading}>Resetting the password</h1>
 
       {submitted ? (
